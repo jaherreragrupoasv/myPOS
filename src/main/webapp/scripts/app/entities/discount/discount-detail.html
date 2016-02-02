@@ -1,0 +1,62 @@
+
+<div>
+    <h2><span translate="myappApp.discount.detail.title">Discount</span> {{discount.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="myappApp.discount.discountName">DiscountName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{discount.discountName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.discount.fromDate">FromDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{discount.fromDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.discount.toDate">ToDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{discount.toDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.discount.percentage">Percentage</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{discount.percentage}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.discount.minimunToOneFree">MinimunToOneFree</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{discount.minimunToOneFree}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

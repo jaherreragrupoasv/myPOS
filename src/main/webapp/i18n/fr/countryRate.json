@@ -1,0 +1,23 @@
+{
+    "myappApp": {
+        "countryRate" : {
+            "home": {
+                "title": "CountryRates",
+                "createLabel": "Créer un nouveau CountryRate",
+                "createOrEditLabel": "Créer ou éditer un CountryRate"
+            },
+            "created": "Un nouveau CountryRate a été créé avec l'identifiant {{ param }}",
+            "updated": "Le CountryRate avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le CountryRate avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le CountryRate {{ id }} ?"
+            },
+            "detail": {
+                "title": "CountryRate"
+            },
+            "country": "Country",
+            "rate": "Rate"
+        }
+    }
+}
+

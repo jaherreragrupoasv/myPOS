@@ -1,0 +1,66 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myDiscountLabel" translate="myappApp.discount.home.createOrEditLabel">Create or edit a Discount</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="discount.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.discount.discountName" for="field_discountName">DiscountName</label>
+            <input type="text" class="form-control" name="discountName" id="field_discountName"
+                    ng-model="discount.discountName"
+                    required ng-maxlength="50" />
+            <div ng-show="editForm.discountName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.discountName.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.discountName.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="50">
+                    This field cannot be longer than 50 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.discount.fromDate" for="field_fromDate">FromDate</label>
+            <input type="date" class="form-control" name="fromDate" id="field_fromDate"
+                    ng-model="discount.fromDate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.discount.toDate" for="field_toDate">ToDate</label>
+            <input type="date" class="form-control" name="toDate" id="field_toDate"
+                    ng-model="discount.toDate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.discount.percentage" for="field_percentage">Percentage</label>
+            <input type="number" class="form-control" name="percentage" id="field_percentage"
+                    ng-model="discount.percentage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.discount.minimunToOneFree" for="field_minimunToOneFree">MinimunToOneFree</label>
+            <input type="number" class="form-control" name="minimunToOneFree" id="field_minimunToOneFree"
+                    ng-model="discount.minimunToOneFree"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

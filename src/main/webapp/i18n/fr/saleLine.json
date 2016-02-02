@@ -1,0 +1,25 @@
+{
+    "myappApp": {
+        "saleLine" : {
+            "home": {
+                "title": "SaleLines",
+                "createLabel": "Créer un nouveau SaleLine",
+                "createOrEditLabel": "Créer ou éditer un SaleLine"
+            },
+            "created": "Un nouveau SaleLine a été créé avec l'identifiant {{ param }}",
+            "updated": "Le SaleLine avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le SaleLine avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le SaleLine {{ id }} ?"
+            },
+            "detail": {
+                "title": "SaleLine"
+            },
+            "quantity": "Quantity",
+            "price": "Price",
+            "tax": "Tax",
+            "sale": "Sale"
+        }
+    }
+}
+

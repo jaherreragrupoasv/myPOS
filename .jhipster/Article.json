@@ -1,0 +1,48 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "category",
+      "otherEntityName": "category",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "categoryName"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "articleName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": 5,
+      "fieldValidateRulesMaxlength": 50
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "barCode",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 10
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "price",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "tax",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "changelogDate": "20160202232542",
+  "dto": "no",
+  "pagination": "no"
+}

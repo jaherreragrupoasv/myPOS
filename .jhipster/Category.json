@@ -1,0 +1,28 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "article",
+      "otherEntityName": "article",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "category"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "categoryName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": 5,
+      "fieldValidateRulesMaxlength": 50
+    }
+  ],
+  "changelogDate": "20160202232542",
+  "dto": "no",
+  "pagination": "no"
+}

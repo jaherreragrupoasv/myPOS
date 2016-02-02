@@ -1,0 +1,24 @@
+{
+    "myappApp": {
+        "salePayment" : {
+            "home": {
+                "title": "SalePayments",
+                "createLabel": "Créer un nouveau SalePayment",
+                "createOrEditLabel": "Créer ou éditer un SalePayment"
+            },
+            "created": "Un nouveau SalePayment a été créé avec l'identifiant {{ param }}",
+            "updated": "Le SalePayment avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le SalePayment avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le SalePayment {{ id }} ?"
+            },
+            "detail": {
+                "title": "SalePayment"
+            },
+            "creditCard": "CreditCard",
+            "date": "Date",
+            "amount": "Amount"
+        }
+    }
+}
+

@@ -1,0 +1,94 @@
+
+<div>
+    <h2><span translate="myappApp.sale.detail.title">Sale</span> {{sale.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.fecha">Fecha</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.fecha | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.country">Country</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.country}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.rate">Rate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.rate}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.subTotal">SubTotal</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.subTotal}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.discounts">Discounts</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.discounts}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.taxes">Taxes</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.taxes}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.total">Total</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.total}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.totalPaied">TotalPaied</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.totalPaied}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.sale.printDate">PrintDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{sale.printDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

@@ -1,0 +1,69 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "saleLine",
+      "otherEntityName": "saleLine",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "sale"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "country",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 10
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "rate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "subTotal",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 5,
+      "fieldName": "discounts",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 6,
+      "fieldName": "taxes",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 7,
+      "fieldName": "total",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 8,
+      "fieldName": "totalPaied",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldId": 9,
+      "fieldName": "printDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "changelogDate": "20160202232542",
+  "dto": "no",
+  "pagination": "no"
+}

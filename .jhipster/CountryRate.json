@@ -1,0 +1,23 @@
+{
+  "relationships": [],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "country",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 10
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "rate",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "changelogDate": "20160202232542",
+  "dto": "no",
+  "pagination": "no"
+}

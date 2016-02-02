@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myArticleLabel" translate="myappApp.article.home.createOrEditLabel">Create or edit a Article</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="article.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.article.articleName" for="field_articleName">ArticleName</label>
+            <input type="text" class="form-control" name="articleName" id="field_articleName"
+                    ng-model="article.articleName"
+                    required ng-minlength="5" ng-maxlength="50" />
+            <div ng-show="editForm.articleName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.articleName.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.articleName.$error.minlength" translate="entity.validation.minlength" translate-value-min="5">
+                    This field is required to be at least 5 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.articleName.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="50">
+                    This field cannot be longer than 50 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.article.barCode" for="field_barCode">BarCode</label>
+            <input type="text" class="form-control" name="barCode" id="field_barCode"
+                    ng-model="article.barCode"
+                    required ng-maxlength="10" />
+            <div ng-show="editForm.barCode.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.barCode.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.barCode.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.article.price" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                    ng-model="article.price"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.article.tax" for="field_tax">Tax</label>
+            <input type="number" class="form-control" name="tax" id="field_tax"
+                    ng-model="article.tax"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="myappApp.article.category" for="field_category">category</label>
+            <select class="form-control" id="field_category" name="category" ng-model="article.category" ng-options="category as category.categoryName for category in categorys track by category.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,96 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="mySaleLabel" translate="myappApp.sale.home.createOrEditLabel">Create or edit a Sale</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="sale.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.fecha" for="field_fecha">Fecha</label>
+            <input type="date" class="form-control" name="fecha" id="field_fecha"
+                    ng-model="sale.fecha"
+                    required />
+            <div ng-show="editForm.fecha.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.fecha.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.country" for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                    ng-model="sale.country"
+                    required ng-maxlength="10" />
+            <div ng-show="editForm.country.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.country.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.country.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.rate" for="field_rate">Rate</label>
+            <input type="number" class="form-control" name="rate" id="field_rate"
+                    ng-model="sale.rate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.subTotal" for="field_subTotal">SubTotal</label>
+            <input type="number" class="form-control" name="subTotal" id="field_subTotal"
+                    ng-model="sale.subTotal"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.discounts" for="field_discounts">Discounts</label>
+            <input type="number" class="form-control" name="discounts" id="field_discounts"
+                    ng-model="sale.discounts"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.taxes" for="field_taxes">Taxes</label>
+            <input type="number" class="form-control" name="taxes" id="field_taxes"
+                    ng-model="sale.taxes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.total" for="field_total">Total</label>
+            <input type="number" class="form-control" name="total" id="field_total"
+                    ng-model="sale.total"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.totalPaied" for="field_totalPaied">TotalPaied</label>
+            <input type="number" class="form-control" name="totalPaied" id="field_totalPaied"
+                    ng-model="sale.totalPaied"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="myappApp.sale.printDate" for="field_printDate">PrintDate</label>
+            <input type="date" class="form-control" name="printDate" id="field_printDate"
+                    ng-model="sale.printDate"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,21 @@
+{
+    "myappApp": {
+        "discountSaleLine" : {
+            "home": {
+                "title": "DiscountSaleLines",
+                "createLabel": "Create a new DiscountSaleLine",
+                "createOrEditLabel": "Create or edit a DiscountSaleLine"
+            },
+            "created": "A new DiscountSaleLine is created with identifier {{ param }}",
+            "updated": "A DiscountSaleLine is updated with identifier {{ param }}",
+            "deleted": "A DiscountSaleLine is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete DiscountSaleLine {{ id }}?"
+            },
+            "detail": {
+                "title": "DiscountSaleLine"
+            },
+            "amount": "Amount"
+        }
+    }
+}

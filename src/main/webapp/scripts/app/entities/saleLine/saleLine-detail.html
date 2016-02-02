@@ -1,0 +1,54 @@
+
+<div>
+    <h2><span translate="myappApp.saleLine.detail.title">SaleLine</span> {{saleLine.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="myappApp.saleLine.quantity">Quantity</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{saleLine.quantity}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.saleLine.price">Price</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{saleLine.price}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.saleLine.tax">Tax</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{saleLine.tax}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.saleLine.sale">sale</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="sale.detail({id:saleLine.sale.id})">{{saleLine.sale.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
