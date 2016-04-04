@@ -7,7 +7,7 @@ angular.module('myappApp')
                 parent: 'site',
                 url: '/',
                 data: {
-                    authorities: []
+                    authorities: ['ROLE_USER']
                 },
                 views: {
                     'content@': {

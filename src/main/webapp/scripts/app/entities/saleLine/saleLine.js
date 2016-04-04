@@ -7,7 +7,8 @@ angular.module('myappApp')
                 parent: 'entity',
                 url: '/saleLines',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
+                    //authorities: ['ROLE_USER'],
                     pageTitle: 'myappApp.saleLine.home.title'
                 },
                 views: {
@@ -51,7 +52,8 @@ angular.module('myappApp')
                 parent: 'saleLine',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
+                    //authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({

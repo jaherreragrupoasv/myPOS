@@ -3,7 +3,7 @@
         "saleLine" : {
             "home": {
                 "title": "SaleLines",
-                "createLabel": "Create a new SaleLine",
+                "createLabel": "Create a new Sale",
                 "createOrEditLabel": "Create or edit a SaleLine"
             },
             "created": "A new SaleLine is created with identifier {{ param }}",
@@ -18,7 +18,8 @@
             "quantity": "Quantity",
             "price": "Price",
             "tax": "Tax",
-            "sale": "Sale"
+            "sale": "Sale",
+            "article": "Article"
         }
     }
 }

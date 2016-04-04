@@ -23,16 +23,19 @@
     },
     {
       "fieldId": 4,
-      "fieldName": "percentage",
-      "fieldType": "BigDecimal"
+      "fieldName": "type",
+      "fieldType": "DiscountType",
+      "fieldValues": "PORCENTAJE,CANTIDAD"
     },
     {
       "fieldId": 5,
-      "fieldName": "minimunToOneFree",
-      "fieldType": "Integer"
+      "fieldName": "value",
+      "fieldType": "BigDecimal"
     }
   ],
-  "changelogDate": "20160202232542",
+  "changelogDate": "20160318080624",
   "dto": "no",
-  "pagination": "no"
+  "pagination": "no",
+  "service": "no",
+  "entityTableName": "Discount"
 }

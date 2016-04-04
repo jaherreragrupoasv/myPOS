@@ -2,6 +2,8 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.Sale;
+import com.mycompany.myapp.domain.SaleLine;
+import com.mycompany.myapp.repository.SaleLineRepository;
 import com.mycompany.myapp.repository.SaleRepository;
 
 import org.junit.Before;
@@ -26,6 +28,7 @@ import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,8 +74,21 @@ public class SaleResourceIntTest {
     private static final LocalDate DEFAULT_PRINT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_PRINT_DATE = LocalDate.now(ZoneId.systemDefault());
 
+    //    Lines
+    private static final Integer DEFAULT_QUANTITY = 1;
+    private static final Integer UPDATED_QUANTITY = 2;
+
+    private static final BigDecimal DEFAULT_PRICE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_PRICE = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_TAX = new BigDecimal(1);
+    private static final BigDecimal UPDATED_TAX = new BigDecimal(2);
+
     @Inject
     private SaleRepository saleRepository;
+
+    @Inject
+    private SaleLineRepository saleLineRepository;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -82,14 +98,25 @@ public class SaleResourceIntTest {
 
     private MockMvc restSaleMockMvc;
 
+    private MockMvc restSaleLineMockMvc;
+
     private Sale sale;
+
+    private SaleLine saleLine;
 
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
+
         SaleResource saleResource = new SaleResource();
         ReflectionTestUtils.setField(saleResource, "saleRepository", saleRepository);
         this.restSaleMockMvc = MockMvcBuilders.standaloneSetup(saleResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        SaleLineResource saleLineResource = new SaleLineResource();
+        ReflectionTestUtils.setField(saleLineResource, "saleLineRepository", saleLineRepository);
+        this.restSaleLineMockMvc = MockMvcBuilders.standaloneSetup(saleLineResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
@@ -97,6 +124,7 @@ public class SaleResourceIntTest {
     @Before
     public void initTest() {
         sale = new Sale();
+
         sale.setFecha(DEFAULT_FECHA);
         sale.setCountry(DEFAULT_COUNTRY);
         sale.setRate(DEFAULT_RATE);
@@ -279,4 +307,107 @@ public class SaleResourceIntTest {
         List<Sale> sales = saleRepository.findAll();
         assertThat(sales).hasSize(databaseSizeBeforeDelete - 1);
     }
+
+    @Test
+    @Transactional
+    public void saveSaleAndGetIt() throws Exception {
+
+        SaleLine saleLine;
+        SaleLine saleLine2;
+
+        sale = new Sale();
+
+        sale.setFecha(DEFAULT_FECHA);
+        sale.setCountry(DEFAULT_COUNTRY);
+        sale.setRate(DEFAULT_RATE);
+        sale.setSubTotal(DEFAULT_SUB_TOTAL);
+        sale.setDiscounts(DEFAULT_DISCOUNTS);
+        sale.setTaxes(DEFAULT_TAXES);
+        sale.setTotal(DEFAULT_TOTAL);
+        sale.setTotalPaied(DEFAULT_TOTAL_PAIED);
+        sale.setPrintDate(DEFAULT_PRINT_DATE);
+
+        saleRepository.saveAndFlush(sale);
+
+        saleLine = new SaleLine();
+
+        saleLine.setQuantity(DEFAULT_QUANTITY);
+        saleLine.setPrice(DEFAULT_PRICE);
+        saleLine.setTax(DEFAULT_TAX);
+        saleLine.setSale_id(sale.getId());
+
+        saleLine2 = new SaleLine();
+
+        saleLine2.setQuantity(DEFAULT_QUANTITY);
+        saleLine2.setPrice(DEFAULT_PRICE);
+        saleLine2.setTax(DEFAULT_TAX);
+        saleLine2.setSale_id(sale.getId());
+
+        List<SaleLine> saleLines = new ArrayList<SaleLine>();
+
+        saleLines.add(saleLine);
+        saleLines.add(saleLine2);
+
+        sale.setSaleLines(saleLines);
+
+        saleRepository.saveAndFlush(sale);
+
+        //Al grabar en BBDD, no guarda las líneas al no haber puesto el sale_id
+        //Así que grabamos sale y luego saleLine
+        // Initialize the database
+
+//        Las líneas recuperadas sin usar el EAGER en clase Sale
+        List<SaleLine> salelines = saleRepository.getSaleLines(sale.getId());
+
+        // Get the sale
+        restSaleMockMvc.perform(get("/api/sales/{id}", sale.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value(sale.getId().intValue()))
+            .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()))
+            .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()))
+            .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.intValue()))
+            .andExpect(jsonPath("$.subTotal").value(DEFAULT_SUB_TOTAL.intValue()))
+            .andExpect(jsonPath("$.discounts").value(DEFAULT_DISCOUNTS.intValue()))
+            .andExpect(jsonPath("$.taxes").value(DEFAULT_TAXES.intValue()))
+            .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.intValue()))
+            .andExpect(jsonPath("$.totalPaied").value(DEFAULT_TOTAL_PAIED.intValue()))
+            .andExpect(jsonPath("$.printDate").value(DEFAULT_PRINT_DATE.toString()))
+            .andExpect(jsonPath("$.saleLines").value(sale.getSaleLines()));
+    }
+
+    @Test
+    @Transactional
+    public void saveSaleCheckTotal() throws Exception {
+
+        saleRepository.saveAndFlush(sale);
+
+        // Leo el último ID insertado
+        List<Sale> sales = saleRepository.findAll();
+        Sale testSale = sales.get(sales.size() - 1);
+
+        saleLine = new SaleLine();
+
+        saleLine.setSale_id(testSale.getId());
+        saleLine.setQuantity(DEFAULT_QUANTITY);
+        saleLine.setPrice(DEFAULT_PRICE);
+        saleLine.setTax(DEFAULT_TAX);
+
+        // Grabo la venta
+        saleLineRepository.saveAndFlush(saleLine);
+
+        /*restSaleLineMockMvc.perform(post("/api/saleLines")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(saleLine)))
+            .andExpect(status().isCreated());
+*/
+
+//        Calculate total
+        Sale newSale = saleRepository.findOne(testSale.getId());
+
+        assertThat(newSale.getTotal()).isNotZero();
+    }
+
 }
+
+

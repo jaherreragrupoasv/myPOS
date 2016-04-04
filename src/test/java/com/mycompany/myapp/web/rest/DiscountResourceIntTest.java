@@ -32,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.mycompany.myapp.domain.enumeration.DiscountType;
 
 /**
  * Test class for the DiscountResource REST controller.
@@ -52,12 +53,12 @@ public class DiscountResourceIntTest {
 
     private static final LocalDate DEFAULT_TO_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_TO_DATE = LocalDate.now(ZoneId.systemDefault());
+    
+    private static final DiscountType DEFAULT_TYPE = DiscountType.PORCENTAJE;
+    private static final DiscountType UPDATED_TYPE = DiscountType.CANTIDAD;
 
-    private static final BigDecimal DEFAULT_PERCENTAGE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_PERCENTAGE = new BigDecimal(2);
-
-    private static final Integer DEFAULT_MINIMUN_TO_ONE_FREE = 1;
-    private static final Integer UPDATED_MINIMUN_TO_ONE_FREE = 2;
+    private static final BigDecimal DEFAULT_VALUE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_VALUE = new BigDecimal(2);
 
     @Inject
     private DiscountRepository discountRepository;
@@ -88,8 +89,8 @@ public class DiscountResourceIntTest {
         discount.setDiscountName(DEFAULT_DISCOUNT_NAME);
         discount.setFromDate(DEFAULT_FROM_DATE);
         discount.setToDate(DEFAULT_TO_DATE);
-        discount.setPercentage(DEFAULT_PERCENTAGE);
-        discount.setMinimunToOneFree(DEFAULT_MINIMUN_TO_ONE_FREE);
+        discount.setType(DEFAULT_TYPE);
+        discount.setValue(DEFAULT_VALUE);
     }
 
     @Test
@@ -111,8 +112,8 @@ public class DiscountResourceIntTest {
         assertThat(testDiscount.getDiscountName()).isEqualTo(DEFAULT_DISCOUNT_NAME);
         assertThat(testDiscount.getFromDate()).isEqualTo(DEFAULT_FROM_DATE);
         assertThat(testDiscount.getToDate()).isEqualTo(DEFAULT_TO_DATE);
-        assertThat(testDiscount.getPercentage()).isEqualTo(DEFAULT_PERCENTAGE);
-        assertThat(testDiscount.getMinimunToOneFree()).isEqualTo(DEFAULT_MINIMUN_TO_ONE_FREE);
+        assertThat(testDiscount.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testDiscount.getValue()).isEqualTo(DEFAULT_VALUE);
     }
 
     @Test
@@ -147,8 +148,8 @@ public class DiscountResourceIntTest {
                 .andExpect(jsonPath("$.[*].discountName").value(hasItem(DEFAULT_DISCOUNT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
                 .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())))
-                .andExpect(jsonPath("$.[*].percentage").value(hasItem(DEFAULT_PERCENTAGE.intValue())))
-                .andExpect(jsonPath("$.[*].minimunToOneFree").value(hasItem(DEFAULT_MINIMUN_TO_ONE_FREE)));
+                .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+                .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.intValue())));
     }
 
     @Test
@@ -165,8 +166,8 @@ public class DiscountResourceIntTest {
             .andExpect(jsonPath("$.discountName").value(DEFAULT_DISCOUNT_NAME.toString()))
             .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE.toString()))
             .andExpect(jsonPath("$.toDate").value(DEFAULT_TO_DATE.toString()))
-            .andExpect(jsonPath("$.percentage").value(DEFAULT_PERCENTAGE.intValue()))
-            .andExpect(jsonPath("$.minimunToOneFree").value(DEFAULT_MINIMUN_TO_ONE_FREE));
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.intValue()));
     }
 
     @Test
@@ -189,8 +190,8 @@ public class DiscountResourceIntTest {
         discount.setDiscountName(UPDATED_DISCOUNT_NAME);
         discount.setFromDate(UPDATED_FROM_DATE);
         discount.setToDate(UPDATED_TO_DATE);
-        discount.setPercentage(UPDATED_PERCENTAGE);
-        discount.setMinimunToOneFree(UPDATED_MINIMUN_TO_ONE_FREE);
+        discount.setType(UPDATED_TYPE);
+        discount.setValue(UPDATED_VALUE);
 
         restDiscountMockMvc.perform(put("/api/discounts")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -204,8 +205,8 @@ public class DiscountResourceIntTest {
         assertThat(testDiscount.getDiscountName()).isEqualTo(UPDATED_DISCOUNT_NAME);
         assertThat(testDiscount.getFromDate()).isEqualTo(UPDATED_FROM_DATE);
         assertThat(testDiscount.getToDate()).isEqualTo(UPDATED_TO_DATE);
-        assertThat(testDiscount.getPercentage()).isEqualTo(UPDATED_PERCENTAGE);
-        assertThat(testDiscount.getMinimunToOneFree()).isEqualTo(UPDATED_MINIMUN_TO_ONE_FREE);
+        assertThat(testDiscount.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testDiscount.getValue()).isEqualTo(UPDATED_VALUE);
     }
 
     @Test

@@ -24,7 +24,16 @@
             "total": "Total",
             "totalPaied": "TotalPaied",
             "printDate": "PrintDate",
-            "saleLine": "SaleLine"
+            "saleLine": "SaleLine",
+            "article": "Article",
+            "quantity": "Quantity",
+            "price": "Price",
+            "tax": "Tax",
+            "sale": "Sale",
+            "pay": "Pay",
+            "print":"Print",
+            "buy": "Buy",
+            "checkOut":"Check Out"
         }
     }
 }

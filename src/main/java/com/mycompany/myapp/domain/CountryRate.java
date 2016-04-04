@@ -26,10 +26,10 @@ public class CountryRate implements Serializable {
     @Column(name = "country", length = 10, nullable = false)
     private String country;
 
-    @Column(name = "rate", precision=10, scale=2)
+    @Column(name = "rate", precision=10, scale=2, nullable = false)
     private BigDecimal rate;
 
-    
+
     public Long getId() {
         return id;
     }

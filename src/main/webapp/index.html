@@ -16,21 +16,27 @@
         <!-- endbuild -->
         <!-- build:css assets/styles/main.css -->
         <link rel="stylesheet" href="assets/styles/main.css">
+        <link rel="stylesheet" href="assets/styles/ticket.css">
         <!-- endbuild -->
     </head>
     <body ng-app="myappApp">
         <!--[if lt IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
-        <div ui-view="navbar" ng-cloak=""></div>
-        <div class="container">
-            <div class="well" ui-view="content"></div>
 
-            <div class="footer">
-                <p translate="footer">This is your footer</p>
-            </div>
-        </div>
+        <!--<div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>-->
+
+        <div ui-view="navbar" ng-cloak=""></div>
+
+        <div class="well" ui-view="content"></div>
+
+        <!--<div class="container">-->
+            <!--<div class="well" ui-view="content"></div>-->
+
+            <!--&lt;!&ndash;<div class="footer">&ndash;&gt;-->
+                <!--&lt;!&ndash;<p translate="footer">This is your footer</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
 
         <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
         <script>
@@ -156,12 +162,6 @@
     <script src="scripts/app/entities/category/category-delete-dialog.controller.js"></script>
     <script src="scripts/app/entities/category/category-detail.controller.js"></script>
     <script src="scripts/components/entities/category/category.service.js"></script>
-    <script src="scripts/app/entities/discount/discount.js"></script>
-    <script src="scripts/app/entities/discount/discount.controller.js"></script>
-    <script src="scripts/app/entities/discount/discount-dialog.controller.js"></script>
-    <script src="scripts/app/entities/discount/discount-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/discount/discount-detail.controller.js"></script>
-    <script src="scripts/components/entities/discount/discount.service.js"></script>
     <script src="scripts/app/entities/countryRate/countryRate.js"></script>
     <script src="scripts/app/entities/countryRate/countryRate.controller.js"></script>
     <script src="scripts/app/entities/countryRate/countryRate-dialog.controller.js"></script>
@@ -180,18 +180,6 @@
     <script src="scripts/app/entities/saleLine/saleLine-delete-dialog.controller.js"></script>
     <script src="scripts/app/entities/saleLine/saleLine-detail.controller.js"></script>
     <script src="scripts/components/entities/saleLine/saleLine.service.js"></script>
-    <script src="scripts/app/entities/discountSaleLine/discountSaleLine.js"></script>
-    <script src="scripts/app/entities/discountSaleLine/discountSaleLine.controller.js"></script>
-    <script src="scripts/app/entities/discountSaleLine/discountSaleLine-dialog.controller.js"></script>
-    <script src="scripts/app/entities/discountSaleLine/discountSaleLine-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/discountSaleLine/discountSaleLine-detail.controller.js"></script>
-    <script src="scripts/components/entities/discountSaleLine/discountSaleLine.service.js"></script>
-    <script src="scripts/app/entities/discountSale/discountSale.js"></script>
-    <script src="scripts/app/entities/discountSale/discountSale.controller.js"></script>
-    <script src="scripts/app/entities/discountSale/discountSale-dialog.controller.js"></script>
-    <script src="scripts/app/entities/discountSale/discountSale-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/discountSale/discountSale-detail.controller.js"></script>
-    <script src="scripts/components/entities/discountSale/discountSale.service.js"></script>
     <script src="scripts/app/entities/salePayment/salePayment.js"></script>
     <script src="scripts/app/entities/salePayment/salePayment.controller.js"></script>
     <script src="scripts/app/entities/salePayment/salePayment-dialog.controller.js"></script>
@@ -204,6 +192,12 @@
     <script src="scripts/app/entities/article/article-delete-dialog.controller.js"></script>
     <script src="scripts/app/entities/article/article-detail.controller.js"></script>
     <script src="scripts/components/entities/article/article.service.js"></script>
+    <script src="scripts/app/entities/discount/discount.js"></script>
+    <script src="scripts/app/entities/discount/discount.controller.js"></script>
+    <script src="scripts/app/entities/discount/discount-dialog.controller.js"></script>
+    <script src="scripts/app/entities/discount/discount-delete-dialog.controller.js"></script>
+    <script src="scripts/app/entities/discount/discount-detail.controller.js"></script>
+    <script src="scripts/components/entities/discount/discount.service.js"></script>
     <!-- endbuild -->
 </body>
 </html>

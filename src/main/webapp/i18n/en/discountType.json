@@ -1,0 +1,9 @@
+{
+    "myappApp": {
+        "DiscountType" : {
+            "null": "",
+            "PORCENTAJE": "PORCENTAJE",
+            "CANTIDAD": "CANTIDAD"
+        }
+    }
+}

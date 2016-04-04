@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myappApp')
-    .controller('ArticleDetailController', function ($scope, $rootScope, $stateParams, entity, Article, Category) {
+    .controller('ArticleDetailController', function ($scope, $rootScope, $stateParams, entity, Article) {
         $scope.article = entity;
         $scope.load = function (id) {
             Article.get({id: id}, function(result) {

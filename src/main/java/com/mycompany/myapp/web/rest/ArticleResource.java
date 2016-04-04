@@ -27,10 +27,10 @@ import java.util.Optional;
 public class ArticleResource {
 
     private final Logger log = LoggerFactory.getLogger(ArticleResource.class);
-        
+
     @Inject
     private ArticleRepository articleRepository;
-    
+
     /**
      * POST  /articles -> Create a new article.
      */
@@ -95,6 +95,25 @@ public class ArticleResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+
+    /**
+     * GET  /articlesByBarCode/:barCode -> get the "barCode" article.
+     */
+    @RequestMapping(value = "/articlesByBarCode/{barCode}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Article> getByBarCode(@PathVariable String barCode) {
+        log.debug("REST request to get Article : {}", barCode);
+        Article article = articleRepository.findBybarCode(barCode);
+        return Optional.ofNullable(article)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 
     /**
      * DELETE  /articles/:id -> delete the "id" article.

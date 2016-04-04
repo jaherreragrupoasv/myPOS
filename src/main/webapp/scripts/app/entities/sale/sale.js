@@ -52,35 +52,50 @@ angular.module('myappApp')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
+                    pageTitle: 'myappApp.sale.detail.title'
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
+                views: {
+                    'content@': {
                         templateUrl: 'scripts/app/entities/sale/sale-dialog.html',
-                        controller: 'SaleDialogController',
-                        size: 'lg',
-                        resolve: {
-                            entity: function () {
-                                return {
-                                    fecha: null,
-                                    country: null,
-                                    rate: null,
-                                    subTotal: null,
-                                    discounts: null,
-                                    taxes: null,
-                                    total: null,
-                                    totalPaied: null,
-                                    printDate: null,
-                                    id: null
-                                };
-                            }
-                        }
-                    }).result.then(function(result) {
-                        $state.go('sale', null, { reload: true });
-                    }, function() {
-                        $state.go('sale');
-                    })
-                }]
+                        controller: 'SaleDialogController'
+                    }
+                }
             })
+            //.state('sale.new', {
+            //    parent: 'sale',
+            //    url: '/new',
+            //    data: {
+            //        authorities: [],
+            //    },
+            //    onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            //
+            //        $uibModal.open({
+            //            templateUrl: 'scripts/app/entities/sale/sale-dialog.html',
+            //            controller: 'SaleDialogController',
+            //            size: 'lg',
+            //            resolve: {
+            //                entity: function () {
+            //                    return {
+            //                        fecha: null,
+            //                        country: null,
+            //                        rate: null,
+            //                        subTotal: null,
+            //                        discounts: null,
+            //                        taxes: null,
+            //                        total: null,
+            //                        totalPaied: null,
+            //                        printDate: null,
+            //                        id: null
+            //                    };
+            //                }
+            //            }
+            //        }).result.then(function(result) {
+            //            $state.go('sale', null, { reload: true });
+            //        }, function() {
+            //            $state.go('sale');
+            //        })
+            //    }]
+            //})
             .state('sale.edit', {
                 parent: 'sale',
                 url: '/{id}/edit',
@@ -103,6 +118,24 @@ angular.module('myappApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('sale.pay', {
+                parent: 'sale',
+                url: '/{id}/pay',
+                data: {
+                    authorities: ['ROLE_USER'],
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/sale/sale-pay.html',
+                        controller: 'SalePayController',
+                        resolve: {
+                            entity: ['Sale', function(Sale) {
+                                return Sale.get({id : $stateParams.id});
+                            }]
+                        }
+                    }
+                }
             })
             .state('sale.delete', {
                 parent: 'sale',

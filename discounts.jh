@@ -1,0 +1,12 @@
+enum DiscountType {
+    PORCENTAJE, CANTIDAD
+  }
+
+entity Discount {
+  discountName String required maxlength(50),
+  fromDate LocalDate,
+  toDate LocalDate,
+  type DiscountType,
+  value BigDecimal
+}
+

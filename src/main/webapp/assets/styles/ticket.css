@@ -1,0 +1,53 @@
+.invoice-title h2, .invoice-title h3 {
+    display: inline-block;
+}
+
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+
+.table > thead > tr > .no-line {
+    border-bottom: none;
+}
+
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+
+
+.keypad {
+    display: table;
+    margin: 10px auto;
+    padding: 0;
+    width: 300px; /* not actually a static size, % in real use */
+}
+
+
+.keypad .key-row {
+    display: table-row;
+    width: 100%
+}
+
+.keypad .key-row .key-cell {
+    display: table-cell;
+    padding: 2px;
+    width: 25%;
+}
+
+.keypad .key-row .key-cell button.key {
+    font-size: medium;
+    font-weight: bold;
+    height: 70px;
+    width: 100%;
+}
+
+.keypad .key-row .key-cell button.key.tall-key {
+}
+
+.keypad .key-row .key-cell button.key.wide-key {
+}
+
+.keypad .key-row .key-cell button .key-alt-fn {
+    font-size: small;
+    font-weight: normal;
+}

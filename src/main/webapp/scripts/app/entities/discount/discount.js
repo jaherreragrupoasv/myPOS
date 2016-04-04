@@ -19,6 +19,7 @@ angular.module('myappApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('discount');
+                        $translatePartialLoader.addPart('discountType');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
@@ -40,6 +41,7 @@ angular.module('myappApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('discount');
+                        $translatePartialLoader.addPart('discountType');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Discount', function($stateParams, Discount) {
@@ -64,8 +66,8 @@ angular.module('myappApp')
                                     discountName: null,
                                     fromDate: null,
                                     toDate: null,
-                                    percentage: null,
-                                    minimunToOneFree: null,
+                                    type: null,
+                                    value: null,
                                     id: null
                                 };
                             }

@@ -18,7 +18,8 @@
             "quantity": "Quantity",
             "price": "Price",
             "tax": "Tax",
-            "sale": "Sale"
+            "sale": "Sale",
+            "article": "Article"
         }
     }
 }

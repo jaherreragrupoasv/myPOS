@@ -1,5 +1,9 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mycompany.myapp.domain.patterns.CostItem;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -17,7 +21,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "sale_line")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class SaleLine implements Serializable {
+public class SaleLine implements Serializable, CostItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,13 +38,31 @@ public class SaleLine implements Serializable {
     @Column(name = "tax", precision=10, scale=2)
     private BigDecimal tax;
 
-    @ManyToOne
-    @JoinColumn(name = "sale_id")
-    private Sale sale;
+    @NotNull
+    @JsonProperty
+    protected Long sale_id;
 
-    public void setSale(Sale sale) {
-        this.sale = sale;
+    @Column(name = "sale_id")
+    public Long getSale_id() {
+        return sale_id;
     }
+
+    public void setSale_id(Long id) {
+        this.sale_id = id;
+    }
+
+//    @ManyToOne
+//    @JsonBackReference
+//    @JoinColumn(name = "sale_id")
+//    private Sale sale;
+//
+//    public Sale getSale() {
+//        return sale;
+//    }
+//
+//    public void setSale(Sale sale) {
+//        this.sale = sale;
+//    }
 
     @ManyToOne
     @JoinColumn(name = "article_id")
@@ -49,6 +71,11 @@ public class SaleLine implements Serializable {
     public void setArticle(Article article) {
         this.article = article;
     }
+
+    public Article getArticle() {
+        return article;
+    }
+
 
     public Long getId() {
         return id;
@@ -82,8 +109,15 @@ public class SaleLine implements Serializable {
         this.tax = tax;
     }
 
-    public Sale getSale() {
-        return sale;
+    public BigDecimal CalculateTotal() {
+        return (price.multiply(new BigDecimal(quantity)));
+    }
+
+    public BigDecimal CalculateTaxes() {
+        return (price.multiply(new BigDecimal(quantity)).multiply(tax).multiply(new BigDecimal(0.01)));
+    }
+
+    public void show() {
     }
 
     @Override

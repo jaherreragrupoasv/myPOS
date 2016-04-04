@@ -22,8 +22,8 @@ angular.module('myappApp')
                 discountName: null,
                 fromDate: null,
                 toDate: null,
-                percentage: null,
-                minimunToOneFree: null,
+                type: null,
+                value: null,
                 id: null
             };
         };

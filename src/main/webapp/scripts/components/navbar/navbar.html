@@ -7,7 +7,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/"><span translate="global.title">jhipster</span> <span class="navbar-version">v{{VERSION}}</span></a>
+            <a class="navbar-brand" href="#/"><span translate="global.title">jhipster</span> <span
+                class="navbar-version">v{{VERSION}}</span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse" ng-switch="isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
@@ -29,24 +30,34 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ui-sref-active="active" ><a ui-sref="category" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.category">category</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="discount" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.discount">discount</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="countryRate" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.countryRate">countryRate</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="sale" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.sale">sale</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="saleLine" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.saleLine">saleLine</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="discountSaleLine" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.discountSaleLine">discountSaleLine</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="discountSale" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.discountSale">discountSale</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="salePayment" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.salePayment">salePayment</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="article" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.article">article</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="category" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.category">category</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="article" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.article">article</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="countryRate" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.countryRate">countryRate</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="discount" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.discount">Discount</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="sale" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.sale">sale</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="saleLine" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.saleLine">saleLine</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="salePayment" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.salePayment">salePayment</span></a></li>
                         <!-- jhipster-needle-002 - JHipster will add entities to the menu here -->
                     </ul>
                 </li>
@@ -61,21 +72,35 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="settings" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-wrench"></span>
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="settings" data-toggle="collapse"
+                                                                             data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-wrench"></span>
                             &#xA0;<span translate="global.menu.account.settings">Settings</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="password" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-lock"></span>
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="password" data-toggle="collapse"
+                                                                             data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-lock"></span>
                             &#xA0;<span translate="global.menu.account.password">Password</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="sessions" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-cloud"></span>
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="sessions" data-toggle="collapse"
+                                                                             data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-cloud"></span>
                             &#xA0;<span translate="global.menu.account.sessions">Sessions</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="true"><a href="" ng-click="logout()" id="logout" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-log-out"></span>
+                        <li ui-sref-active="active" ng-switch-when="true"><a href="" ng-click="logout()" id="logout"
+                                                                             data-toggle="collapse"
+                                                                             data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-log-out"></span>
                             &#xA0;<span translate="global.menu.account.logout">Sign out</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-log-in"></span>
+                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="login" data-toggle="collapse"
+                                                                              data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-log-in"></span>
                             &#xA0;<span translate="global.menu.account.login">Sign in</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="register" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-plus-sign"></span>
+                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="register" data-toggle="collapse"
+                                                                              data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-plus-sign"></span>
                             &#xA0;<span translate="global.menu.account.register">Register</span></a></li>
                     </ul>
                 </li>
-                <li ng-class="{active: $state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" class="dropdown pointer">
+                <li ng-class="{active: $state.includes('admin')}" ng-switch-when="true" has-authority="ROLE_ADMIN"
+                    class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="" id="admin-menu">
                         <span>
                             <span class="glyphicon glyphicon-tower"></span>
@@ -84,19 +109,33 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ui-sref-active="active"><a ui-sref="user-management" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-user"></span>
+                        <li ui-sref-active="active"><a ui-sref="user-management" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-user"></span>
                             &#xA0;<span translate="global.menu.admin.user-management">User management</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="metrics" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-dashboard"></span>
+                        <li ui-sref-active="active"><a ui-sref="metrics" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-dashboard"></span>
                             &#xA0;<span translate="global.menu.admin.metrics">Metrics</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="health" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-heart"></span>
+                        <li ui-sref-active="active"><a ui-sref="health" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-heart"></span>
                             &#xA0;<span translate="global.menu.admin.health">Health</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="configuration" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-list-alt"></span>
+                        <li ui-sref-active="active"><a ui-sref="configuration" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-list-alt"></span>
                             &#xA0;<span translate="global.menu.admin.configuration">Configuration</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="audits" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-bell"></span>
+                        <li ui-sref-active="active"><a ui-sref="audits" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-bell"></span>
                             &#xA0;<span translate="global.menu.admin.audits">Audits</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="logs" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-tasks"></span>
+                        <li ui-sref-active="active"><a ui-sref="logs" data-toggle="collapse"
+                                                       data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-tasks"></span>
                             &#xA0;<span translate="global.menu.admin.logs">Logs</span></a></li>
-                        <li ng-hide="inProduction" ui-sref-active="active"><a ui-sref="docs" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-book"></span>
+                        <li ng-hide="inProduction" ui-sref-active="active"><a ui-sref="docs" data-toggle="collapse"
+                                                                              data-target=".navbar-collapse.in"><span
+                            class="glyphicon glyphicon-book"></span>
                             &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
                     </ul>
                 </li>
@@ -110,7 +149,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li active-menu="{{language}}" ng-repeat="language in languages">
-                            <a href="" ng-click="changeLanguage(language)" data-toggle="collapse" data-target=".navbar-collapse.in">{{language | findLanguageFromKey}}</a>
+                            <a href="" ng-click="changeLanguage(language)" data-toggle="collapse"
+                               data-target=".navbar-collapse.in">{{language | findLanguageFromKey}}</a>
                         </li>
                     </ul>
                 </li>

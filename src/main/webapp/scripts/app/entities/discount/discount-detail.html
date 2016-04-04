@@ -36,18 +36,34 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="myappApp.discount.percentage">Percentage</span>
+                    <span translate="myappApp.discount.type">Type</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{discount.percentage}}</span>
+                    <span class="form-control-static" translate="{{'myappApp.DiscountType.' + discount.type}}">{{discount.type}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="myappApp.discount.minimunToOneFree">MinimunToOneFree</span>
+                    <span translate="myappApp.discount.value">Value</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{discount.minimunToOneFree}}</span>
+                    <span class="form-control-static">{{discount.value}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.discount.category">category</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="category.detail({id:discount.category.id})">{{discount.category.categoryName}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="myappApp.discount.article">article</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="article.detail({id:discount.article.id})">{{discount.article.articleName}}</a>
                 </td>
             </tr>
             </tbody>

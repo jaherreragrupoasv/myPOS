@@ -1,26 +1,31 @@
 <div>
     <h2 translate="myappApp.discount.home.title">Discounts</h2>
     <jh-alert></jh-alert>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" ui-sref="discount.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span translate="myappApp.discount.home.createLabel">Create a new Discount</span>
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="discount.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+                        translate="myappApp.discount.home.createLabel">Create new Discount
+                    </span>
                 </button>
             </div>
         </div>
     </div>
-
+    <br/>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="jh-table table table-striped">
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="myappApp.discount.discountName">DiscountName</span></th>
                     <th><span translate="myappApp.discount.fromDate">FromDate</span></th>
                     <th><span translate="myappApp.discount.toDate">ToDate</span></th>
-                    <th><span translate="myappApp.discount.percentage">Percentage</span></th>
-                    <th><span translate="myappApp.discount.minimunToOneFree">MinimunToOneFree</span></th>
+                    <th><span translate="myappApp.discount.type">Type</span></th>
+                    <th><span translate="myappApp.discount.value">Value</span></th>
+                    <th><span translate="myappApp.discount.category">category</span></th>
+                    <th><span translate="myappApp.discount.article">article</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,24 +35,35 @@
                     <td>{{discount.discountName}}</td>
                         <td>{{discount.fromDate | date:'mediumDate'}}</td>
                         <td>{{discount.toDate | date:'mediumDate'}}</td>
-                    <td>{{discount.percentage}}</td>
-                    <td>{{discount.minimunToOneFree}}</td>
+                    <td translate="{{'myappApp.DiscountType.' + discount.type}}">{{discount.type}}</td>
+                    <td>{{discount.value}}</td>
                     <td>
-                        <button type="submit"
-                                ui-sref="discount.detail({id:discount.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="discount.edit({id:discount.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="discount.delete({id:discount.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
-                        </button>
+                        <a ui-sref="category.detail({id:discount.category.id})">{{discount.category.categoryName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="category.detail({id:discount.article.id})">{{discount.article.articleName}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="discount.detail({id:discount.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="discount.edit({id:discount.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="discount.delete({id:discount.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

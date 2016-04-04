@@ -1,96 +1,315 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="clear()">&times;</button>
+    <h4 class="modal-title" id="mySaleLabel" translate="myappApp.sale.home.createOrEditLabel">Create or edit a Sale</h4>
+</div>
 
-<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+<jh-alert-error></jh-alert-error>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="mySaleLabel" translate="myappApp.sale.home.createOrEditLabel">Create or edit a Sale</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id" translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="sale.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.fecha" for="field_fecha">Fecha</label>
-            <input type="date" class="form-control" name="fecha" id="field_fecha"
-                    ng-model="sale.fecha"
-                    required />
-            <div ng-show="editForm.fecha.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.fecha.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
+
+<div class="row">
+
+    <!--KEYPAD-->
+    <div class="col-xs-3">
+        <div class="keypad">
+            <div class="key-row">
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('7')" type="button">7</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('8')" type="button">8</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('9')" type="button">9</button>
+                </div>
+            </div>
+            <div class="key-row">
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('4')" type="button">4</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('5')" type="button">5</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('6')" type="button">6</button>
+                </div>
+            </div>
+            <div class="key-row">
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('1')" type="button">1</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('2')" type="button">2</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('3')" type="button">3</button>
+                </div>
+            </div>
+            <div class="key-row">
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('0')" type="button">0</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('del')" type="button">Del</button>
+                </div>
+                <div class="key-cell">
+                    <button class="btn btn-default key" ng-click="handleDigit('clean')" type="button">Clean</button>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.country" for="field_country">Country</label>
-            <input type="text" class="form-control" name="country" id="field_country"
-                    ng-model="sale.country"
-                    required ng-maxlength="10" />
-            <div ng-show="editForm.country.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.country.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.country.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="10">
-                    This field cannot be longer than 10 characters.
-                </p>
+    </div>
+
+    <!--<button class="btn btn-default key wide-key" type="button"><span class="key-alt-fn">Del</span></button>-->
+
+
+    <!--salePanel-->
+    <div id="salePanel" class="col-xs-9">
+        <br>
+
+        <div class="row">
+            <div class="col-xs-2">
+                <input type="numeric" class="form-control" id="barCode" name="barCode" ng-model="barCode"/>
+            </div>
+            <div class="col-xs-8">
+                <select class="form-control" id="field_article" name="article" ng-model="saleLine.article"
+                        ng-options="article as article.articleName for article in articles track by article.id">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                <button type="submit" ng-click="saveLine()" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-shopping-cart">&nbsp;</span><span translate="myappApp.sale.buy"> Comprar</span>
+                </button>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.rate" for="field_rate">Rate</label>
-            <input type="number" class="form-control" name="rate" id="field_rate"
-                    ng-model="sale.rate"
-                     />
+        <br>
+
+        <!--Lista de líneas-->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                <!--track by saleLine.id-->
+                <tr ng-repeat="saleLine in sale.saleLines">
+
+                    <td width="5%">
+                        <button type="submit" ng-click="deleteLine(saleLine)" class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </td>
+
+                    <td width="5%">
+                        <button type="submit" ng-click="plusQuantity(saleLine)" class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </td>
+
+                    <td width="15%">
+                        <input type="numeric" readonly class="form-control" id="quantity" name="quantity"
+                               ng-model="saleLine.quantity"/>
+                    </td>
+
+                    <td width="5%">
+                        <button type="submit" ng-click="minusQuantity(saleLine)" class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                    </td>
+
+
+                    <td width="60%">
+                        <span class="label label-info">{{saleLine.article.articleName}}</span>
+                    </td>
+
+                    <td width="10%" align="right">
+                        <span class="label label-info">{{totalLine(saleLine)}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" align="right">
+                        <span class="label label-default">{{totalSale()}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" align="left">
+                        <button type="button" class="btn btn-info btn-lg" ng-click="save()">
+                            <span translate="myappApp.sale.pay">Pagar</span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.subTotal" for="field_subTotal">SubTotal</label>
-            <input type="number" class="form-control" name="subTotal" id="field_subTotal"
-                    ng-model="sale.subTotal"
-                     />
+    </div>
+
+    <!--saleFinalPanel-->
+    <div id="saleFinalPanel" class="col-xs-5">
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong><span translate="myappApp.sale.detail.title">Sale</span>
+                            {{sale.id}}</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <td><strong>Article</strong></td>
+                                    <td class="text-center"><strong>Price</strong></td>
+                                    <td class="text-center"><strong>Quantity</strong></td>
+                                    <td class="text-right"><strong>Totals</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="saleLine in sale.saleLines">
+                                    <td>{{saleLine.article.articleName}}</td>
+                                    <td class="text-center">{{saleLine.price}}</td>
+                                    <td class="text-center">{{saleLine.quantity}}</td>
+                                    <td class="text-right">{{totalLine(saleLine)}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                    <td class="thick-line text-right">{{sale.subTotal}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Taxes</strong></td>
+                                    <td class="no-line text-right">{{sale.taxes}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Discounts</strong></td>
+                                    <td class="no-line text-right">{{sale.discounts}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Total</strong></td>
+                                    <td class="no-line text-right">{{sale.total | currency : "$" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Resta por pagar:</strong></td>
+                                    <td class="no-line text-right">{{leftToPay | currency : "$" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.discounts" for="field_discounts">Discounts</label>
-            <input type="number" class="form-control" name="discounts" id="field_discounts"
-                    ng-model="sale.discounts"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.taxes" for="field_taxes">Taxes</label>
-            <input type="number" class="form-control" name="taxes" id="field_taxes"
-                    ng-model="sale.taxes"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.total" for="field_total">Total</label>
-            <input type="number" class="form-control" name="total" id="field_total"
-                    ng-model="sale.total"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.totalPaied" for="field_totalPaied">TotalPaied</label>
-            <input type="number" class="form-control" name="totalPaied" id="field_totalPaied"
-                    ng-model="sale.totalPaied"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="myappApp.sale.printDate" for="field_printDate">PrintDate</label>
-            <input type="date" class="form-control" name="printDate" id="field_printDate"
-                    ng-model="sale.printDate"
-                     />
+    </div>
+
+    <!--paymentPanel-->
+    <div id="paymentPanel" class="col-xs-4">
+        <br>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default">By Cash</button>
+                    <button type="button" class="btn btn-default">By Credit Card</button>
+                </div>
+
+                <div class="radio">
+                    <label><input type="radio" id="efectivo" ng-model="paymentMethod" value="true">Efectivo</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" id="tarjeta" ng-model="paymentMethod" value="false">Tarjeta</label>
+                </div>
+            </div>
         </div>
 
+        <div class="row">
+            <div id="creditCardPanel" class="col-xs-6">
+                <label class="control-label" for="field_creditCard">Credit Card Number</label>
+                <input type="text" class="form-control" name="field_creditCard" id="field_creditCard"
+                       ng-model="salePayment.creditCard" maxlength="20"/>
+            </div>
+            <div class="col-xs-6">
+                <label class="control-label" for="field_amount">Amount</label>
+                <input type="number" class="form-control" name="field_amount" id="field_amount"
+                       ng-model="salePayment.amount"/>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!--PAYMENT LINES-->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                    <!--track by salePayment.id-->
+                    <tr ng-repeat="salePayment in sale.salePayments">
+
+                        <td width="5%">
+                            <button type="submit" ng-click="deleteSalePayment(salePayment)" class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-remove-sign"></span>
+                            </button>
+                        </td>
+
+                        <td width="75%">
+                            <span class="label label-info">{{salePayment.type}}</span>
+                        </td>
+
+                        <td width="20%" align="right">
+                            <span class="label label-info">{{salePayment.amount}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="left">
+                            <button type="button" class="btn btn-info btn-lg" data-dismiss="modal" ng-click="saveSalePayment()">
+                                <span class="glyphicon glyphicon-check"></span>&nbsp;<span
+                                translate="myappApp.sale.pay">Pay</span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
-        </button>
+
+    <!--printPanel-->
+    <div id="printPanel" class="col-xs-4">
+        <br>
+
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <label class="control-label">Total a devolver:</label>
+                        </td>
+                        <td colspan="3" align="right">
+                            <span class="label label-default">{{leftToPay | currency : "$" }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="left">
+                            <button type="button" class="btn btn-info btn-lg" data-dismiss="modal" ng-click="printSale()">
+                                <span class="glyphicon glyphicon-print"></span>&nbsp;<span
+                                translate="myappApp.sale.print">Imprimir</span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
-</form>
+
+</div>
+
+</div>
+

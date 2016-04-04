@@ -4,7 +4,8 @@
             "home": {
                 "title": "Discounts",
                 "createLabel": "Create a new Discount",
-                "createOrEditLabel": "Create or edit a Discount"
+                "createOrEditLabel": "Create or edit a Discount",
+                "search": "Search for Discount"
             },
             "created": "A new Discount is created with identifier {{ param }}",
             "updated": "A Discount is updated with identifier {{ param }}",
@@ -18,8 +19,10 @@
             "discountName": "DiscountName",
             "fromDate": "FromDate",
             "toDate": "ToDate",
-            "percentage": "Percentage",
-            "minimunToOneFree": "MinimunToOneFree"
+            "type": "Type",
+            "value": "Value",
+            "category": "Category",
+            "article": "Article"
         }
     }
 }

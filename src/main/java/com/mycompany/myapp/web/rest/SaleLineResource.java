@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.SaleLine;
 import com.mycompany.myapp.repository.SaleLineRepository;
+import com.mycompany.myapp.service.SaleLineService;
+import com.mycompany.myapp.service.SaleService;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +29,13 @@ import java.util.Optional;
 public class SaleLineResource {
 
     private final Logger log = LoggerFactory.getLogger(SaleLineResource.class);
-        
+
     @Inject
     private SaleLineRepository saleLineRepository;
-    
+
+    @Inject
+    private SaleLineService saleLineService;
+
     /**
      * POST  /saleLines -> Create a new saleLine.
      */
@@ -43,7 +48,12 @@ public class SaleLineResource {
         if (saleLine.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("saleLine", "idexists", "A new saleLine cannot already have an ID")).body(null);
         }
+
         SaleLine result = saleLineRepository.save(saleLine);
+
+//      Save line and update total
+//        SaleLine result = saleLineService.saveLine(saleLine);
+
         return ResponseEntity.created(new URI("/api/saleLines/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("saleLine", result.getId().toString()))
             .body(result);
@@ -61,7 +71,12 @@ public class SaleLineResource {
         if (saleLine.getId() == null) {
             return createSaleLine(saleLine);
         }
+
         SaleLine result = saleLineRepository.save(saleLine);
+
+//      Save line and update total
+//        SaleLine result = saleLineService.saveLine(saleLine);
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("saleLine", saleLine.getId().toString()))
             .body(result);
@@ -77,7 +92,7 @@ public class SaleLineResource {
     public List<SaleLine> getAllSaleLines() {
         log.debug("REST request to get all SaleLines");
         return saleLineRepository.findAll();
-            }
+    }
 
     /**
      * GET  /saleLines/:id -> get the "id" saleLine.

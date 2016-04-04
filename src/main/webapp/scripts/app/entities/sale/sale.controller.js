@@ -31,4 +31,25 @@ angular.module('myappApp')
                 id: null
             };
         };
+
+        $scope.new = function () {
+            $scope.clear();
+
+            $scope.sale.fecha = Date.now();
+            $scope.sale.country = "ES";
+
+            Sale.update($scope.sale, onSaveSuccessSale, onSaveErrorSale);
+        };
+
+        var onSaveSuccessSale = function (result) {
+            $scope.isSaving = false;
+            $scope.sale = result;
+
+            $state.go("sale.detail", "{id:'1'}");
+        };
+
+        var onSaveErrorSale = function (result) {
+            $scope.isSaving = false;
+        };
+
     });

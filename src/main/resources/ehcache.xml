@@ -36,4 +36,17 @@
     <cache name="com.mycompany.myapp.domain.User.persistentTokens"
            timeToLiveSeconds="3600">
     </cache>
-    </ehcache>
+
+    <cache name="com.mycompany.myapp.domain.Category"
+           timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.mycompany.myapp.domain.Article"
+           timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.mycompany.myapp.domain.Discount"
+           timeToLiveSeconds="3600">
+    </cache>
+
+</ehcache>

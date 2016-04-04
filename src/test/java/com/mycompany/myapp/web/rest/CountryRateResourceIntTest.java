@@ -42,11 +42,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class CountryRateResourceIntTest {
 
-    private static final String DEFAULT_COUNTRY = "AAAAA";
-    private static final String UPDATED_COUNTRY = "BBBBB";
+    private static final String DEFAULT_COUNTRY = "ESPAÑA";
+    private static final String UPDATED_COUNTRY = "FRANCIA";
 
-    private static final BigDecimal DEFAULT_RATE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_RATE = new BigDecimal(2);
+    private static final BigDecimal DEFAULT_RATE = new BigDecimal(0.5);
+    private static final BigDecimal UPDATED_RATE = new BigDecimal(0.5);
 
     @Inject
     private CountryRateRepository countryRateRepository;
@@ -128,7 +128,7 @@ public class CountryRateResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(countryRate.getId().intValue())))
                 .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())))
-                .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.intValue())));
+                .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.toString())));
     }
 
     @Test
@@ -143,7 +143,7 @@ public class CountryRateResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(countryRate.getId().intValue()))
             .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()))
-            .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.intValue()));
+            .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.toString()));
     }
 
     @Test

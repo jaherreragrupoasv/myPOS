@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import com.mycompany.myapp.domain.enumeration.DiscountType;
+
 /**
  * A Discount.
  */
@@ -33,15 +35,20 @@ public class Discount implements Serializable {
     @Column(name = "to_date")
     private LocalDate toDate;
 
-    @Column(name = "percentage", precision=10, scale=2)
-    private BigDecimal percentage;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private DiscountType type;
 
-    @Column(name = "minimun_to_one_free")
-    private Integer minimunToOneFree;
+    @Column(name = "value", precision=10, scale=2)
+    private BigDecimal value;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
 
     public void setCategory(Category category) {
         this.category = category;
@@ -50,6 +57,10 @@ public class Discount implements Serializable {
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
+
+    public Article getArticle() {
+        return article;
+    }
 
     public void setArticle(Article article) {
         this.article = article;
@@ -87,20 +98,20 @@ public class Discount implements Serializable {
         this.toDate = toDate;
     }
 
-    public BigDecimal getPercentage() {
-        return percentage;
+    public DiscountType getType() {
+        return type;
     }
 
-    public void setPercentage(BigDecimal percentage) {
-        this.percentage = percentage;
+    public void setType(DiscountType type) {
+        this.type = type;
     }
 
-    public Integer getMinimunToOneFree() {
-        return minimunToOneFree;
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setMinimunToOneFree(Integer minimunToOneFree) {
-        this.minimunToOneFree = minimunToOneFree;
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
     @Override
@@ -112,6 +123,9 @@ public class Discount implements Serializable {
             return false;
         }
         Discount discount = (Discount) o;
+        if(discount.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, discount.id);
     }
 
@@ -127,8 +141,8 @@ public class Discount implements Serializable {
             ", discountName='" + discountName + "'" +
             ", fromDate='" + fromDate + "'" +
             ", toDate='" + toDate + "'" +
-            ", percentage='" + percentage + "'" +
-            ", minimunToOneFree='" + minimunToOneFree + "'" +
+            ", type='" + type + "'" +
+            ", value='" + value + "'" +
             '}';
     }
 }

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-4">
                 <button class="btn btn-primary" ui-sref="sale.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span translate="myappApp.sale.home.createLabel">Create a new Sale</span>
+                    <span class="glyphicon glyphicon-flash"></span> <span translate="myappApp.sale.home.createLabel">Create a new sale</span>
                 </button>
             </div>
         </div>
@@ -14,50 +14,49 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="myappApp.sale.fecha">Fecha</span></th>
-                    <th><span translate="myappApp.sale.country">Country</span></th>
-                    <th><span translate="myappApp.sale.rate">Rate</span></th>
-                    <th><span translate="myappApp.sale.subTotal">SubTotal</span></th>
-                    <th><span translate="myappApp.sale.discounts">Discounts</span></th>
-                    <th><span translate="myappApp.sale.taxes">Taxes</span></th>
-                    <th><span translate="myappApp.sale.total">Total</span></th>
-                    <th><span translate="myappApp.sale.totalPaied">TotalPaied</span></th>
-                    <th><span translate="myappApp.sale.printDate">PrintDate</span></th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th><span translate="global.field.id">ID</span></th>
+                <th><span translate="myappApp.sale.fecha">Fecha</span></th>
+                <th><span translate="myappApp.sale.country">Country</span></th>
+                <th><span translate="myappApp.sale.rate">Rate</span></th>
+                <th><span translate="myappApp.sale.subTotal">SubTotal</span></th>
+                <th><span translate="myappApp.sale.discounts">Discounts</span></th>
+                <th><span translate="myappApp.sale.taxes">Taxes</span></th>
+                <th><span translate="myappApp.sale.total">Total</span></th>
+                <th><span translate="myappApp.sale.printDate">PrintDate</span></th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="sale in sales track by sale.id">
-                    <td><a ui-sref="sale.detail({id:sale.id})">{{sale.id}}</a></td>
-                        <td>{{sale.fecha | date:'mediumDate'}}</td>
-                    <td>{{sale.country}}</td>
-                    <td>{{sale.rate}}</td>
-                    <td>{{sale.subTotal}}</td>
-                    <td>{{sale.discounts}}</td>
-                    <td>{{sale.taxes}}</td>
-                    <td>{{sale.total}}</td>
-                    <td>{{sale.totalPaied}}</td>
-                        <td>{{sale.printDate | date:'mediumDate'}}</td>
-                    <td>
-                        <button type="submit"
-                                ui-sref="sale.detail({id:sale.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="sale.edit({id:sale.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="sale.delete({id:sale.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
-                        </button>
-                    </td>
-                </tr>
+            <tr ng-repeat="sale in sales track by sale.id">
+                <td><a ui-sref="sale.detail({id:sale.id})">{{sale.id}}</a></td>
+                <td>{{sale.fecha | date:'mediumDate'}}</td>
+                <td>{{sale.country}}</td>
+                <td>{{sale.rate}}</td>
+                <td>{{sale.subTotal}}</td>
+                <td>{{sale.discounts}}</td>
+                <td>{{sale.taxes}}</td>
+                <td>{{sale.total}}</td>
+                <td>{{sale.printDate | date:'mediumDate'}}</td>
+                <td>
+                    <button type="submit"
+                            ui-sref="sale.detail({id:sale.id})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                    </button>
+                    <!--<button type="submit"-->
+                    <!--ui-sref="sale.edit({id:sale.id})"-->
+                    <!--class="btn btn-primary btn-sm">-->
+                    <!--<span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>-->
+                    <!--</button>-->
+                    <button type="submit"
+                            ui-sref="sale.delete({id:sale.id})"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span
+                        translate="entity.action.delete"> Delete</span>
+                    </button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -1,8 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mycompany.myapp.domain.Sale;
 import com.mycompany.myapp.domain.SalePayment;
 import com.mycompany.myapp.repository.SalePaymentRepository;
+import com.mycompany.myapp.repository.SaleRepository;
+import com.mycompany.myapp.service.SaleService;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -27,10 +31,16 @@ import java.util.Optional;
 public class SalePaymentResource {
 
     private final Logger log = LoggerFactory.getLogger(SalePaymentResource.class);
-        
+
     @Inject
     private SalePaymentRepository salePaymentRepository;
-    
+
+    @Inject
+    private SaleRepository saleRepository;
+
+    @Inject
+    private SaleService saleService;
+
     /**
      * POST  /salePayments -> Create a new salePayment.
      */
@@ -43,7 +53,11 @@ public class SalePaymentResource {
         if (salePayment.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("salePayment", "idexists", "A new salePayment cannot already have an ID")).body(null);
         }
+
         SalePayment result = salePaymentRepository.save(salePayment);
+
+        BigDecimal totaPaied = saleService.updateSalePaied(result.getSale_id());
+
         return ResponseEntity.created(new URI("/api/salePayments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("salePayment", result.getId().toString()))
             .body(result);
@@ -104,8 +118,17 @@ public class SalePaymentResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Void> deleteSalePayment(@PathVariable Long id) {
+//    public ResponseEntity<BigDecimal> deleteSalePayment(@PathVariable Long id) {
         log.debug("REST request to delete SalePayment : {}", id);
+
+        SalePayment salePayment = salePaymentRepository.findOne(id);
+        Long saleID = salePayment.getSale_id();
+
         salePaymentRepository.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("salePayment", id.toString())).build();
+        BigDecimal totalPaied = saleService.updateSalePaied(saleID);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("salePayment", id.toString()))
+//            .body(totaPaied);
+            .build();
     }
 }

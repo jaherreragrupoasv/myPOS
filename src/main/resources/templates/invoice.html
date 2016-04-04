@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Invoice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div id="saleFinalPanel" class="col-xs-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sale <span th:text="${sale.id}">1</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <td><strong>Article</strong></td>
+                                    <td class="text-center"><strong>Price</strong></td>
+                                    <td class="text-center"><strong>Quantity</strong></td>
+                                    <td class="text-right"><strong>Totals</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="saleLine : ${saleLines}">
+                                    <td th:text="${saleLine.article.articleName}">Onions</td>
+                                    <td th:text="${saleLine.price}">2.41</td>
+                                    <td th:text="${saleLine.quantity}">yes</td>
+                                    <td th:text="${saleLine.quantity}">yes</td>
+                                </tr>
+
+
+                                <!--<tr ng-repeat="saleLine in sale.saleLines">-->
+                                    <!--<td>{{saleLine.article.articleName}}</td>-->
+                                    <!--<td class="text-center">{{saleLine.price | currency : "$"}}</td>-->
+                                    <!--<td class="text-center">{{saleLine.quantity}}</td>-->
+                                    <!--<td class="text-right">{{totalLine(saleLine) | currency : "$" }}</td>-->
+                                <!--</tr>-->
+
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                    <td class="thick-line text-right" th:text="${sale.subTotal}">subtotal</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Taxes</strong></td>
+                                    <td class="no-line text-right" th:text="${sale.taxes}">taxes</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Discounts</strong></td>
+                                    <td class="no-line text-right" th:text="${sale.discounts}">discounts</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Total</strong></td>
+                                    <td class="no-line text-right" th:text="${sale.total}">total</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

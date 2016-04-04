@@ -1,17 +1,19 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mycompany.myapp.domain.patterns.CostItem;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
+
 import java.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * A Sale.
@@ -19,7 +21,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "sale")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Sale implements Serializable {
+public class Sale implements Serializable, CostItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,12 +57,52 @@ public class Sale implements Serializable {
     @Column(name = "print_date")
     private LocalDate printDate;
 
-    @OneToMany(mappedBy = "sale")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<SaleLine> saleLines = new HashSet<>();
+    @OneToMany(mappedBy = "sale_id", fetch = FetchType.LAZY)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    protected List<SaleLine> saleLines;
 
-    
+    public List<SaleLine> getSaleLines() {
+        if(saleLines == null) {
+            saleLines = new ArrayList<>();
+        }
+        return saleLines;
+    }
+
+    public void setSaleLines(List<SaleLine> saleLines) {
+        this.saleLines = saleLines;
+    }
+
+
+    @OneToMany(mappedBy = "sale_id", fetch = FetchType.LAZY)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    protected List<SalePayment> salePayments;
+
+    public List<SalePayment> getSalePayments() {
+        if(salePayments == null) {
+            salePayments = new ArrayList<>();
+        }
+        return salePayments;
+    }
+
+    public void setSalePayments(List<SalePayment> salePayments) {
+        this.salePayments = salePayments;
+    }
+
+
+//    Si lo ponemos LAZY, no recupera en los resources, debemos hacer la recuperación nosotros
+//    @OneToMany(mappedBy = "sale", fetch = FetchType.EAGER)
+//    @JsonManagedReference
+//    private Set<SaleLine> saleLines = new HashSet<>();
+//
+//    public Set<SaleLine> getSaleLines() {
+//        return saleLines;
+//    }
+//
+//    public void setSaleLines(Set<SaleLine> saleLines) {
+//        this.saleLines = saleLines;
+//    }
+
+
     public Long getId() {
         return id;
     }
@@ -141,13 +183,22 @@ public class Sale implements Serializable {
         this.printDate = printDate;
     }
 
-    public Set<SaleLine> getSaleLines() {
-        return saleLines;
+    public BigDecimal CalculateTotal(){
+
+        BigDecimal subTotal = new BigDecimal(0);
+
+        // Muestra cada hijo en este nodo
+        for (SaleLine c : this.getSaleLines())
+        {
+            subTotal = subTotal.add(c.CalculateTotal());
+        }
+
+        this.subTotal = subTotal;
+
+        return subTotal;
     }
 
-    public void setSaleLines(Set<SaleLine> saleLines) {
-        this.saleLines = saleLines;
-    }
+    public void show(){};
 
     @Override
     public boolean equals(Object o) {
@@ -160,6 +211,8 @@ public class Sale implements Serializable {
         Sale sale = (Sale) o;
         return Objects.equals(id, sale.id);
     }
+
+
 
     @Override
     public int hashCode() {

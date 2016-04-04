@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.SalePayment;
+import com.mycompany.myapp.domain.enumeration.PaymentType;
 import com.mycompany.myapp.repository.SalePaymentRepository;
 
 import org.junit.Before;
@@ -47,8 +48,8 @@ public class SalePaymentResourceIntTest {
     private static final String DEFAULT_CREDIT_CARD = "AAAAA";
     private static final String UPDATED_CREDIT_CARD = "BBBBB";
 
-    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final PaymentType DEFAULT_TYPE = PaymentType.EFECTIVO;
+    private static final PaymentType UPDATED_TYPE = PaymentType.EFECTIVO;
 
     private static final BigDecimal DEFAULT_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_AMOUNT = new BigDecimal(2);
@@ -80,7 +81,7 @@ public class SalePaymentResourceIntTest {
     public void initTest() {
         salePayment = new SalePayment();
         salePayment.setCreditCard(DEFAULT_CREDIT_CARD);
-        salePayment.setDate(DEFAULT_DATE);
+        salePayment.setType(DEFAULT_TYPE);
         salePayment.setAmount(DEFAULT_AMOUNT);
     }
 
@@ -101,7 +102,7 @@ public class SalePaymentResourceIntTest {
         assertThat(salePayments).hasSize(databaseSizeBeforeCreate + 1);
         SalePayment testSalePayment = salePayments.get(salePayments.size() - 1);
         assertThat(testSalePayment.getCreditCard()).isEqualTo(DEFAULT_CREDIT_CARD);
-        assertThat(testSalePayment.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testSalePayment.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testSalePayment.getAmount()).isEqualTo(DEFAULT_AMOUNT);
     }
 
@@ -135,7 +136,7 @@ public class SalePaymentResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(salePayment.getId().intValue())))
                 .andExpect(jsonPath("$.[*].creditCard").value(hasItem(DEFAULT_CREDIT_CARD.toString())))
-                .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+                .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())));
     }
 
@@ -151,7 +152,7 @@ public class SalePaymentResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(salePayment.getId().intValue()))
             .andExpect(jsonPath("$.creditCard").value(DEFAULT_CREDIT_CARD.toString()))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()));
     }
 
@@ -173,7 +174,7 @@ public class SalePaymentResourceIntTest {
 
         // Update the salePayment
         salePayment.setCreditCard(UPDATED_CREDIT_CARD);
-        salePayment.setDate(UPDATED_DATE);
+        salePayment.setType(UPDATED_TYPE);
         salePayment.setAmount(UPDATED_AMOUNT);
 
         restSalePaymentMockMvc.perform(put("/api/salePayments")
@@ -186,7 +187,7 @@ public class SalePaymentResourceIntTest {
         assertThat(salePayments).hasSize(databaseSizeBeforeUpdate);
         SalePayment testSalePayment = salePayments.get(salePayments.size() - 1);
         assertThat(testSalePayment.getCreditCard()).isEqualTo(UPDATED_CREDIT_CARD);
-        assertThat(testSalePayment.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testSalePayment.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testSalePayment.getAmount()).isEqualTo(UPDATED_AMOUNT);
     }
 

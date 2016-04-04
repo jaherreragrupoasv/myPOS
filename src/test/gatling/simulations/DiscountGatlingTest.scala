@@ -67,7 +67,7 @@ class DiscountGatlingTest extends Simulation {
             .exec(http("Create new discount")
             .post("/api/discounts")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "discountName":"SAMPLE_TEXT", "fromDate":"2020-01-01T00:00:00.000Z", "toDate":"2020-01-01T00:00:00.000Z", "percentage":null, "minimunToOneFree":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "discountName":"SAMPLE_TEXT", "fromDate":"2020-01-01T00:00:00.000Z", "toDate":"2020-01-01T00:00:00.000Z", "type":null, "value":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_discount_url")))
             .pause(10)

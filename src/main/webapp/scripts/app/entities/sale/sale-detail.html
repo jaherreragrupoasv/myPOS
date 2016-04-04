@@ -1,94 +1,74 @@
+<div class="container">
+    <div id="saleFinalPanel" class="col-xs-5">
+        <br>
 
-<div>
-    <h2><span translate="myappApp.sale.detail.title">Sale</span> {{sale.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.fecha">Fecha</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.fecha | date:'mediumDate'}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.country">Country</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.country}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.rate">Rate</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.rate}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.subTotal">SubTotal</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.subTotal}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.discounts">Discounts</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.discounts}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.taxes">Taxes</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.taxes}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.total">Total</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.total}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.totalPaied">TotalPaied</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.totalPaied}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="myappApp.sale.printDate">PrintDate</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{sale.printDate | date:'mediumDate'}}</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <strong><span translate="myappApp.sale.detail.title">Sale</span>{{sale.id}}</strong>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <td><strong>Article</strong></td>
+                                    <td class="text-center"><strong>Price</strong></td>
+                                    <td class="text-center"><strong>Quantity</strong></td>
+                                    <td class="text-right"><strong>Totals</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="saleLine in sale.saleLines">
+                                    <td>{{saleLine.article.articleName}}</td>
+                                    <td class="text-center">{{saleLine.price}}</td>
+                                    <td class="text-center">{{saleLine.quantity}}</td>
+                                    <td class="text-right">{{totalLine(saleLine)}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                    <td class="thick-line text-right">{{sale.subTotal}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Taxes</strong></td>
+                                    <td class="no-line text-right">{{sale.taxes}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Discounts</strong></td>
+                                    <td class="no-line text-right">{{sale.discounts}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Total</strong></td>
+                                    <td class="no-line text-right">{{sale.total}}&nbsp;{{moneda}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" align="left">
+                                        <button type="button" class="btn btn-info btn-lg" data-dismiss="modal" ng-click="printSale()">
+                                            <span class="glyphicon glyphicon-print"></span>&nbsp;<span
+                                            translate="myappApp.sale.print">Imprimir</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <button type="submit"
-            onclick="window.history.back()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-    </button>
 </div>
+
+
