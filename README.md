@@ -1,6 +1,24 @@
-# myapp
+# myPOS
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
+
+It's a POC about a Point of Sale when you have Categories, Articles, Country Rates, Discounts and of course, the sales with his lines.
+ 
+TECHNICAL FEATURES: 
+------------------
+ 
+ - Spring 4.0 using anotation @Query in repository.
+ - ThymeLeaf to print sale.
+ - Domain generated using .jh files.
+ - Design patterns includes (Strategy, Composite, Decorator, DAO, ...).
+ 
+ROADMAP:
+-------
+ 
+ - Include rates from a web service https://currencylayer.com/dashboard 
+ - Improve CSS in ThymeLeaf.
+ - Improve interface.
+ - Do more testing.
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 

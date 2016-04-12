@@ -6,6 +6,8 @@ angular.module('myappApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pascalpr
     'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
     'ui.bootstrap', 'ui.router',  'infinite-scroll'])
 
+    //, 'ngAnimate', 'ui.odometer'
+
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Language, Auth, Principal, ENV, VERSION) {
         // update the window title using params in the following
         // precendence

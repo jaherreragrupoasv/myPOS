@@ -39,6 +39,15 @@ public class SalesDiscountsDecorator implements ITotalCalculator {
     @Inject
     private ArticleRepository articleRepository;
 
+    @Autowired
+    @Qualifier("DiscountByPercentage")
+    private ITotalDiscount discountByPercentage;
+
+    @Autowired
+    @Qualifier("DiscountByQuantity")
+    private ITotalDiscount discountByQuantity;
+
+
     public void calculateTotal(Sale sale) {
 
         BigDecimal discounts = new BigDecimal(0);
@@ -46,32 +55,42 @@ public class SalesDiscountsDecorator implements ITotalCalculator {
 //        Traigo los descuentos aplicables
         List<Discount> discountsToApply = saleLineRepository.getDiscountsToApply(sale.getId(), LocalDate.now(), LocalDate.now());
 
+        DiscountContext context = new DiscountContext();
+
         // Para cada descuento ...
         for (Discount d : discountsToApply) {
             if (d.getType() == DiscountType.CANTIDAD) {
 
-//                Traemos las unidades compradas de ese producto
-                BigDecimal numberOfItems = discountRepository.getNumberOfItems(sale.getId(), d.getId());
 
-                if (numberOfItems == null) {numberOfItems = new BigDecimal(0);}
+                context.setDiscount(discountByQuantity);
 
-                BigDecimal numberOfItemsToDiscount = numberOfItems.subtract(d.getValue());
-
-                if (numberOfItemsToDiscount.intValue() > 0) {
-                    Article article = d.getArticle();
-
-                    discounts = discounts.add(article.getPrice().multiply(numberOfItemsToDiscount));
-                }
+////                Traemos las unidades compradas de ese producto
+//                BigDecimal numberOfItems = discountRepository.getNumberOfItems(sale.getId(), d.getId());
+//
+//                if (numberOfItems == null) {numberOfItems = new BigDecimal(0);}
+//
+//                BigDecimal numberOfItemsToDiscount = numberOfItems.subtract(d.getValue());
+//
+//                if (numberOfItemsToDiscount.intValue() > 0) {
+//                    Article article = d.getArticle();
+//
+//                    discounts = discounts.add(article.getPrice().multiply(numberOfItemsToDiscount));
+//                }
 
             } else if (d.getType() == DiscountType.PORCENTAJE) {
 
-//                Traemos el total de compra de esa categoria o producto o total
-                BigDecimal total = discountRepository.getBaseOfDiscount(sale.getId(), d.getId());
+                context.setDiscount(discountByPercentage);
 
-                if (total == null) {total = new BigDecimal(0);}
+////                Traemos el total de compra de esa categoria o producto o total
+//                BigDecimal total = discountRepository.getBaseOfDiscount(sale.getId(), d.getId());
+//
+//                if (total == null) {total = new BigDecimal(0);}
+//
+//                discounts = discounts.add(total.multiply(d.getValue().multiply(new BigDecimal(0.01))));
 
-                discounts = discounts.add(total.multiply(d.getValue().multiply(new BigDecimal(0.01))));
             }
+
+            discounts = discounts.add(context.getDiscount(sale.getId(), d));
         }
 
         sale.setDiscounts(discounts);

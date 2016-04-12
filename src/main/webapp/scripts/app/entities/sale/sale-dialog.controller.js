@@ -7,6 +7,13 @@ angular.module('myappApp').controller('SaleDialogController',
             var hoy = new Date();
             var digitos = "";
 
+            var control = 1;
+
+            $scope.setControl = function (number) {
+                control = number;
+                digitos = "";
+            };
+
             $scope.handleDigit = function (digito) {
                 if (digito == "clean") {
                     digitos = "";
@@ -16,7 +23,13 @@ angular.module('myappApp').controller('SaleDialogController',
                     digitos = digitos.concat(digito);
                 }
 
-                $scope.barCode = digitos;
+                if (control == 1) {
+                    $scope.barCode = digitos;
+                } else if (control == 2) {
+                    $scope.salePayment.creditCard = digitos;
+                } else if (control == 3) {
+                    $scope.salePayment.amount = parseInt(digitos);
+                };
             };
 
 
@@ -65,6 +78,7 @@ angular.module('myappApp').controller('SaleDialogController',
                     }
                     else {
                         $('#creditCardPanel').hide();
+                        $('#field_amount').focus();
                     }
                 }
             });
@@ -134,7 +148,14 @@ angular.module('myappApp').controller('SaleDialogController',
                 $('#saleFinalPanel').show(1000);
 
                 //$('#efectivo').selected = true;
-                $scope.paymentMethod = true;
+
+                $scope.clearSalePayment();
+
+                $('#tarjeta').prop('checked', true);
+                $('#field_creditCard').focus();
+
+                //$scope.paymentMethod = true;
+
                 $scope.leftToPay = $scope.sale.total;
             };
 
@@ -201,6 +222,8 @@ angular.module('myappApp').controller('SaleDialogController',
                     amount: null,
                     sale_id: null
                 };
+
+                digitos="";
             };
 
             ////////////////////////////////////////////////////////

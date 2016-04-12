@@ -68,7 +68,7 @@
 
         <div class="row">
             <div class="col-xs-2">
-                <input type="numeric" class="form-control" id="barCode" name="barCode" ng-model="barCode"/>
+                <input type="numeric" class="form-control" id="barCode" name="barCode" ng-model="barCode" ng-focus="setControl(1)"/>
             </div>
             <div class="col-xs-8">
                 <select class="form-control" id="field_article" name="article" ng-model="saleLine.article"
@@ -125,8 +125,12 @@
                 </tr>
                 <tr>
                     <td colspan="6" align="right">
+                        <!--<span odometer="{{totalSale()}}"></span>-->
                         <span class="label label-default">{{totalSale()}}</span>
                     </td>
+                    <!--<span class="text-success checkout-total-price">-->
+                        <!--$<span odometer="{{totalSale()}}"></span>-->
+                    <!--</span>-->
                 </tr>
                 <tr>
                     <td colspan="6" align="left">
@@ -215,16 +219,11 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default">By Cash</button>
-                    <button type="button" class="btn btn-default">By Credit Card</button>
-                </div>
-
                 <div class="radio">
-                    <label><input type="radio" id="efectivo" ng-model="paymentMethod" value="true">Efectivo</label>
+                    <label><input type="radio" id="efectivo" ng-model="paymentMethod" value="true">By Cash</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" id="tarjeta" ng-model="paymentMethod" value="false">Tarjeta</label>
+                    <label><input type="radio" id="tarjeta" ng-model="paymentMethod" value="false">By Credit Card</label>
                 </div>
             </div>
         </div>
@@ -233,12 +232,12 @@
             <div id="creditCardPanel" class="col-xs-6">
                 <label class="control-label" for="field_creditCard">Credit Card Number</label>
                 <input type="text" class="form-control" name="field_creditCard" id="field_creditCard"
-                       ng-model="salePayment.creditCard" maxlength="20"/>
+                       ng-model="salePayment.creditCard" ng-focus="setControl(2)" maxlength="20"/>
             </div>
             <div class="col-xs-6">
                 <label class="control-label" for="field_amount">Amount</label>
                 <input type="number" class="form-control" name="field_amount" id="field_amount"
-                       ng-model="salePayment.amount"/>
+                       ng-model="salePayment.amount" ng-focus="setControl(3)"/>
             </div>
         </div>
         <br>
