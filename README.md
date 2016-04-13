@@ -2,7 +2,7 @@
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
-It's a POC about a Point of Sale when you have Categories, Articles, Country Rates, Discounts and of course, the sales with his lines.
+This is a POC about a Point of Sale when you have Categories, Articles, Country Rates, Discounts and of course, the sales with his lines.
  
 TECHNICAL FEATURES: 
 ------------------
