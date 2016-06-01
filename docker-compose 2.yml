@@ -1,0 +1,29 @@
+nginx:
+  image: jwilder/nginx-proxy
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+  ports:
+    - "80:80"
+  links:
+    - cowerwallet
+cowerwallet:
+  build: .
+  environment:
+    -  VIRTUAL_HOST=www.coverwallet.dev
+  command: bash -c "cd /home/coverwallet && rake db:migrate && foreman start"
+  volumes:
+    - .:/home/coverwallet
+  ports:
+    - "3000:3000"
+  links:
+    - redis
+    - memcached
+redis:
+  image: redis:latest
+  ports:
+    - "6379:6379"
+memcached:
+  image: sameersbn/memcached:latest
+  ports:
+    - "11211:11211"
+  restart: always
